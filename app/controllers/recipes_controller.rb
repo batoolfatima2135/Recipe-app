@@ -1,6 +1,10 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: %i[ show edit update destroy ]
 
+  def public
+    @recipes = Recipe.where(public: true)
+    render 'public'
+  end
   # GET /recipes or /recipes.json
   def index
     @recipes = Recipe.all
