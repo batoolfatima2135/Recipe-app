@@ -4,15 +4,18 @@ class RecipeFoodsController < ApplicationController
   # GET /recipe_foods or /recipe_foods.json
   def index
     @recipe_foods = RecipeFood.all
+ 
   end
 
   # GET /recipe_foods/1 or /recipe_foods/1.json
   def show
+  
   end
 
   # GET /recipe_foods/new
   def new
     @recipe_food = RecipeFood.new
+    
   end
 
   # GET /recipe_foods/1/edit
@@ -21,17 +24,22 @@ class RecipeFoodsController < ApplicationController
 
   # POST /recipe_foods or /recipe_foods.json
   def create
-    @recipe_food = RecipeFood.new(recipe_food_params)
-
-    respond_to do |format|
+    @food = Food.find_by(name: params[:food_name])
+    if @food
+      @recipe_food = RecipeFood.new(quantity: params[:quantity])
+    @recipe = Recipe.find(params[:recipe_id])
+    @recipe_food.recipe = @recipe
+     @recipe_food.food = @food
       if @recipe_food.save
-        format.html { redirect_to recipe_food_url(@recipe_food), notice: "Recipe food was successfully created." }
-        format.json { render :show, status: :created, location: @recipe_food }
+        redirect_to recipe_food_url(@recipe_food), notice: "Recipe food was successfully created." 
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @recipe_food.errors, status: :unprocessable_entity }
+       render :new, status: :unprocessable_entity 
       end
-    end
+    else
+   redirect_to new_recipe_food_url(@recipe_food), alert: "Food not available, Add it first." 
+end
+
+    
   end
 
   # PATCH/PUT /recipe_foods/1 or /recipe_foods/1.json
@@ -65,6 +73,6 @@ class RecipeFoodsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def recipe_food_params
-      params.require(:recipe_food).permit(:quantity, :user_id, :food_id)
+      params.require(:recipe_food).permit(:quantity, :recipe_id, :food_name)
     end
 end
