@@ -26,7 +26,7 @@
               <tbody>
               <% @foods.each do |food| %>
                 <tr>
-                  <td><%= link_to "Show this food", food.name %></td>
+                  <td><%= link_to food.name, food %></td>
                   <td><%= food.quantity %></td>
                   <td><%= food.measurement_unit %></td>
                   <td><%= food.price %></td>
