@@ -1,32 +1,23 @@
+<div class="row justify-content-center">
+    <div class="col-6">
 <%= form_with(model: recipe_food) do |form| %>
-  <% if recipe_food.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(recipe_food.errors.count, "error") %> prohibited this recipe_food from being saved:</h2>
-
-      <ul>
-        <% recipe_food.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <div>
-    <%= form.label :quantity, style: "display: block" %>
-    <%= form.number_field :quantity %>
+    <%= form.label :quantity, style: "display: block", class: 'form-label' do %>
+    Quantity
+   <span>(in grams/units)</span>
+   <% end %>
+    <%= form.number_field :quantity, class: 'form-control'%>
   </div>
 
   <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
+  <%= form.label :food_name, style: "display: block", class: 'form-label' %>
+  <%= form.text_field :food_name, class: 'form-control' %>
+</div>
 
   <div>
-    <%= form.label :food_id, style: "display: block" %>
-    <%= form.text_field :food_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%= form.submit  "Add ingredient", class: 'btn btn-success text-center my-4'%>
   </div>
 <% end %>
+ </div>
+  </div>
