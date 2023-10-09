@@ -1,14 +1,43 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Foods</h1>
-
-<div id="foods">
-  <% @foods.each do |food| %>
-    <%= render food %>
-    <p>
-      <%= link_to "Show this food", food %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New food", new_food_path %>
+<section class='container'>
+  <div class="row">
+    <div class="col-md-12">
+      <p style="color: green"><%= notice %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+        <div class="block">
+          <div class="block-header block-header-default row">
+              <h1 class="block-title col-md-10">All Foods</h1>
+              <div class="block-options col-md-2 m-auto">
+                   <%= link_to "New food", new_food_path, class: "btn btn-info text-white" %>
+              </div>
+          </div>
+          <div class="block-content">
+           <table id="foods" class="table table-border table-striped">
+              <thead>
+                <tr>
+                  <th>Name Of Food</th>
+                  <th>Quantity</th>
+                  <th>Measurement Unit</th>
+                  <th>Price</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+              <% @foods.each do |food| %>
+                <tr>
+                  <td><%= link_to food.name, food %></td>
+                  <td><%= food.quantity %></td>
+                  <td><%= food.measurement_unit %></td>
+                  <td><%= food.price %></td>
+                  <td><%= button_to "Destroy this food", food, method: :delete, class: 'btn btn-danger mr-2' %></td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
