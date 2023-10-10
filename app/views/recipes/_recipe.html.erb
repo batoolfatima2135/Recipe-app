@@ -1,32 +1,21 @@
-<div id="<%= dom_id recipe %>">
+<div  class="col-4">
   <p>
-    <strong>Name:</strong>
     <%= recipe.name %>
   </p>
+   <p>
+  <%= button_to "Remove", recipe, method: :delete, class: 'btn btn-danger' %>
+    </p>
+</div>
 
-  <p>
-    <strong>Preparation-time:</strong>
-    <%= recipe.preparation-time %>
-  </p>
+ <div  class="col-6 col-lg-5">
+  <a href="<%= recipe_path(recipe) %>">
+     <p>
 
-  <p>
-    <strong>Cooking-time:</strong>
-    <%= recipe.cooking-time %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
     <%= recipe.description %>
   </p>
+  </a>
+ 
+  </div>
 
-  <p>
-    <strong>Public:</strong>
-    <%= recipe.public %>
-  </p>
+ 
 
-  <p>
-    <strong>User:</strong>
-    <%= recipe.user_id %>
-  </p>
-
-</div>

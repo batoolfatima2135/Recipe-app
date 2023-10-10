@@ -12,7 +12,10 @@ class RecipesController < ApplicationController
   end
 
   # GET /recipes/1 or /recipes/1.json
-  def show; end
+  def show
+    @recipe = set_recipe
+    @recipe_foods = @recipe.recipe_foods.where(recipe_id: @recipe.id)
+  end
 
   # GET /recipes/new
   def new
@@ -25,16 +28,21 @@ class RecipesController < ApplicationController
   # POST /recipes or /recipes.json
   def create
     @recipe = Recipe.new(recipe_params)
+    @recipe.user = current_user
 
-    respond_to do |format|
-      if @recipe.save
-        format.html { redirect_to recipe_url(@recipe), notice: 'Recipe was successfully created.' }
-        format.json { render :show, status: :created, location: @recipe }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @recipe.errors, status: :unprocessable_entity }
-      end
+    if @recipe.save
+      redirect_to recipe_url(@recipe), notice: 'Recipe was successfully created.'
+
+    else
+      render :new, status: :unprocessable_entity
     end
+  end
+
+  def toggle_public
+    @recipe = Recipe.find(params[:id])
+    @recipe.update(public: !@recipe.public)
+
+    respond_to(&:js)
   end
 
   # PATCH/PUT /recipes/1 or /recipes/1.json
@@ -52,12 +60,9 @@ class RecipesController < ApplicationController
 
   # DELETE /recipes/1 or /recipes/1.json
   def destroy
+    @recipe = Recipe.find(params[:id])
     @recipe.destroy
-
-    respond_to do |format|
-      format.html { redirect_to recipes_url, notice: 'Recipe was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to recipes_path
   end
 
   private

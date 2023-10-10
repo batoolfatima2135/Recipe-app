@@ -1,14 +1,22 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Recipes</h1>
+<div class="row justify-content-center">
+  <div class="col-lg-4 col-10 d-flex ">
+    <h1 class="text-success">My Recipes</h1>
+     <%= link_to "Add new recipe", new_recipe_path, class: 'm-lg-3 m-2' %>
+  </div>
+  
+</div>
 
-<div id="recipes">
+
+<div id="recipes" class="row justify-content-center">
   <% @recipes.each do |recipe| %>
-    <%= render recipe %>
-    <p>
-      <%= link_to "Show this recipe", recipe %>
-    </p>
+     <div class="row col-lg-8 col-12 border my-2 py-3">
+       <%= render recipe %>
+  </div>
+   
+   
   <% end %>
 </div>
 
-<%= link_to "New recipe", new_recipe_path %>
+
