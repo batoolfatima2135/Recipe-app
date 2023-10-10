@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   resources :recipe_foods
   resources :foods
   resources :recipes do
-  put 'toggle_public', on: :member
-  resources :recipe_foods
+    put 'toggle_public', on: :member
+    resources :recipe_foods
   end
 
 end
