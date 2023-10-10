@@ -1,22 +1,20 @@
 class RecipeFoodsController < ApplicationController
-  # GET /recipe_foods/new
+   before_action :authenticate_user!
+
   def new
     @recipe_food = RecipeFood.new
     @recipe = Recipe.find(params[:recipe_id])
   end
 
-  # GET /recipe_foods/1/edit
   def edit
     @recipe_food = RecipeFood.find(params[:id])
     @recipe = Recipe.find(params[:recipe_id])
     @edit = true
   end
 
-  # POST /recipe_foods or /recipe_foods.json
   def create
     @food = Food.find_by(name: params[:recipe_food][:food_name])
     if @food
-
       @quantity = @food.quantity - (params[:recipe_food][:quantity]).to_i
       @food.update(quantity: @quantity)
       @recipe_food = RecipeFood.new(quantity: params[:recipe_food][:quantity])
@@ -33,7 +31,6 @@ class RecipeFoodsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /recipe_foods/1 or /recipe_foods/1.json
   def update
     @recipe_food = RecipeFood.find_by(params[:recipe_id])
     @old_quantity = @recipe_food.quantity
@@ -54,7 +51,6 @@ class RecipeFoodsController < ApplicationController
     end
   end
 
-  # DELETE /recipe_foods/1 or /recipe_foods/1.json
   def destroy
     @recipe_food = RecipeFood.find(params[:id])
     @recipe = Recipe.find(params[:recipe_id])
@@ -62,13 +58,10 @@ class RecipeFoodsController < ApplicationController
     @quantity = @food.quantity + @recipe_food.quantity
     @food.update(quantity: @quantity)
     return unless @recipe_food.destroy
-
     redirect_to recipe_url(@recipe), notice: 'Recipe ingredient was successfully removed.'
   end
 
   private
-
-  # Only allow a list of trusted parameters through.
   def recipe_food_params
     params.require(:recipe_food).permit(:quantity, :food_name, :recipe_id)
   end
