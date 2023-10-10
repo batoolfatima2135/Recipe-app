@@ -12,9 +12,9 @@ class RecipesController < ApplicationController
   end
 
   # GET /recipes/1 or /recipes/1.json
-  def show 
-   @recipe = set_recipe
-   @recipe_foods = @recipe.recipe_foods.where(recipe_id:  @recipe.id)
+  def show
+    @recipe = set_recipe
+    @recipe_foods = @recipe.recipe_foods.where(recipe_id: @recipe.id)
   end
 
   # GET /recipes/new
@@ -30,23 +30,20 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
 
-      if @recipe.save
-      redirect_to recipe_url(@recipe), notice: "Recipe was successfully created."
-       
-      else
+    if @recipe.save
+      redirect_to recipe_url(@recipe), notice: 'Recipe was successfully created.'
+
+    else
       render :new, status: :unprocessable_entity
-      end
+    end
   end
 
   def toggle_public
-  @recipe = Recipe.find(params[:id])
-  @recipe.update(public: !@recipe.public)
-  
-  respond_to do |format|
-    format.js
-  end
- end
+    @recipe = Recipe.find(params[:id])
+    @recipe.update(public: !@recipe.public)
 
+    respond_to(&:js)
+  end
 
   # PATCH/PUT /recipes/1 or /recipes/1.json
   def update

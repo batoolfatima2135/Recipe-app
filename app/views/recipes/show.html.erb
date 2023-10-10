@@ -26,14 +26,7 @@
            <%= link_to "Add ingredient", new_recipe_recipe_food_path(@recipe), class: 'btn btn-success my-2' %>
        </div>
  <table class="table table-success table-striped-columns my-4">
-    <thead></thead>
-     <% @recipe_foods.each do |food| %>
-     <div class="row col-lg-8 col-12 border my-2 py-3">
-       <%= render recipe %>
-  </div>
-   
-   
-  <% end %>
+    <thead>
     <tr>
       <th scope="col">Food</th>
       <th scope="col">Quantity</th>
@@ -45,12 +38,12 @@
   <% if @recipe_foods.present? %>
  <% @recipe_foods.each do |recipe_food| %>
      <tr>
-      <td><%= recipe_food.name %></td>
-      <td><%= recipe_food.quantity %></td>
-      <td><%= recipe_food.quantity * recipe_food.food.price %></td>
-      <td>
-          <%= link_to "Modify", recipe_food_path(recipe_food) %> 
-          <%= link_to "Remove", recipe_food_path(recipe_food), method: :delete %>
+      <td><%= recipe_food.food.name %> </td>
+      <td><%= recipe_food.quantity %> <%= recipe_food.food.measurement_unit %></td>
+      <td>$<%= recipe_food.quantity * recipe_food.food.price %></td>
+      <td class="d-flex">
+          <%= link_to "Modify", edit_recipe_recipe_food_path(recipe_food.recipe, recipe_food), class: 'p-2 mx-2'%> 
+          <%= button_to "Remove",  recipe_recipe_food_path(recipe_food.recipe.id, recipe_food), method: :delete, class: 'btn btn-warning' %>
       </td>
     </tr>
   <% end %>
