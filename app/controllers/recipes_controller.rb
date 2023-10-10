@@ -6,7 +6,7 @@ class RecipesController < ApplicationController
   def public
     @public_page = true
     @recipes = Recipe.where(public: true).order(created_at: :desc)
-    render  :index
+    render :index
   end
 
   def index
@@ -33,14 +33,13 @@ class RecipesController < ApplicationController
   end
 
   def toggle_public
-     @recipe = Recipe.find(params[:id])
-     @recipe.update(public: params[:recipe][:public])
-     respond_to do |format|
+    @recipe = Recipe.find(params[:id])
+    @recipe.update(public: params[:recipe][:public])
+    respond_to do |format|
       format.json { render json: { success: true } }
-     end
+    end
   end
 
- 
   def destroy
     @recipe = Recipe.find(params[:id])
     @recipe_foods = @recipe.recipe_foods

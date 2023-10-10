@@ -1,5 +1,5 @@
 class RecipeFoodsController < ApplicationController
-   before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def new
     @recipe_food = RecipeFood.new
@@ -58,10 +58,12 @@ class RecipeFoodsController < ApplicationController
     @quantity = @food.quantity + @recipe_food.quantity
     @food.update(quantity: @quantity)
     return unless @recipe_food.destroy
+
     redirect_to recipe_url(@recipe), notice: 'Recipe ingredient was successfully removed.'
   end
 
   private
+
   def recipe_food_params
     params.require(:recipe_food).permit(:quantity, :food_name, :recipe_id)
   end
