@@ -2,20 +2,26 @@
 
 <div class="row justify-content-center">
   <div class="col-lg-4 col-10 d-flex ">
-    <h1 class="text-success">My Recipes</h1>
+    <% if @public_page %>
+      <h1 class="text-success">Public Recipes</h1>
+    <% else %> 
+      <h1 class="text-success">My Recipes</h1>
      <%= link_to "Add new recipe", new_recipe_path, class: 'm-lg-3 m-2' %>
+    <% end %>
   </div>
   
 </div>
 
 
 <div id="recipes" class="row justify-content-center">
+  <% if @recipes.present? %>
   <% @recipes.each do |recipe| %>
      <div class="row col-lg-8 col-12 border my-2 py-3">
        <%= render recipe %>
   </div>
-   
-   
+  <% end %>
+  <% else %>
+   <h4 class="text-center p-5">you have no recipes</h4>
   <% end %>
 </div>
 
