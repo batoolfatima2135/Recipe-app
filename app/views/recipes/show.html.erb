@@ -63,33 +63,9 @@
 </div>
 
 <div class="text-center my-3  ">
-  <%= link_to "Back to recipes", recipes_path, class: 'btn btn-warning'  %>
+  <%= link_to "Back to recipes", recipes_path, class: 'btn btn-warning my-2'  %>
    <% if can? :destroy, @recipe %>
   <%= button_to "Remove recipe", @recipe, method: :delete, class: 'btn btn-danger ' %>
   <% end %>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  $(document).ready(function() {
-    var element = document.getElementById("recipeId");
-    $('#publicToggle').change(function() {
-      var isPublic = this.checked;
-      console.log(isPublic)
-      var recipeId = element.textContent.trim();
-
-      // Send an AJAX request to update the "public" attribute
-      $.ajax({
-        type: 'PUT',
-        url: '/recipes/' + recipeId + '/toggle_public',
-        data: { 'recipe[public]': isPublic },
-        success: function(response) {
-           $('#publicToggle').prop('checked', isPublic);
-        },
-        error: function(xhr) {
-          console.log(xhr)
-        }
-      });
-    });
-  });
-</script>
