@@ -23,13 +23,12 @@ RSpec.describe 'recipe_foods/new', type: :view do
     )
   end
   before(:each) do
- 
     assign(:recipe, recipe)
     assign(:recipe_food, RecipeFood.new(
-      quantity: 1,
-      recipe: recipe,
-      food: food
-    ))
+                           quantity: 1,
+                           recipe:,
+                           food:
+                         ))
   end
 
   it 'renders new recipe_food form' do

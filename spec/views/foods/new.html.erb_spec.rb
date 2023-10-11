@@ -4,12 +4,12 @@ RSpec.describe 'foods/new', type: :view do
   before(:each) do
     user = User.first
     assign(:food, Food.new(
-                   id: 1,
-      name: 'Test food',
-      quantity: 3,
-      measurement_unit: 'gm',
-      price: 120,
-      user: user
+                    id: 1,
+                    name: 'Test food',
+                    quantity: 3,
+                    measurement_unit: 'gm',
+                    price: 120,
+                    user:
                   ))
   end
 
@@ -24,7 +24,6 @@ RSpec.describe 'foods/new', type: :view do
       assert_select 'input[name=?]', 'food[price]'
 
       assert_select 'input[name=?]', 'food[quantity]'
-
     end
   end
 end

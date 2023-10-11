@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-   it 'is valid with valid attributes' do
+  it 'is valid with valid attributes' do
     user = User.new(email: 'user@example.com', password: 'password123')
     expect(user).to be_valid
   end
@@ -11,7 +11,7 @@ RSpec.describe User, type: :model do
     expect(user).not_to be_valid
   end
 
-   it 'authenticates a user with a valid password' do
+  it 'authenticates a user with a valid password' do
     user = User.create(email: 'user@example.com', password: 'password123')
     expect(user.valid_password?('password123')).to be true
   end

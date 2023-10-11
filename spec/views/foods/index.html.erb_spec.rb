@@ -10,15 +10,15 @@ RSpec.describe 'foods/index', type: :view do
                quantity: 3,
                measurement_unit: 'gm',
                price: 120,
-               user: user
+               user:
              ),
              Food.create!(
-              id: 2,
-              name: 'Test',
-              quantity: 3,
-              measurement_unit: 'gm',
-              price: 120,
-              user: user
+               id: 2,
+               name: 'Test',
+               quantity: 3,
+               measurement_unit: 'gm',
+               price: 120,
+               user:
              )
            ])
   end

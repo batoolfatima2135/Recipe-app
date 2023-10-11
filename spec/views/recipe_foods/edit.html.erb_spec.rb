@@ -12,7 +12,7 @@ RSpec.describe 'recipe_foods/edit', type: :view do
       user_id: 1
     )
   end
-   let!(:food) do
+  let!(:food) do
     Food.create(
       id: 1,
       name: 'Test food',
@@ -22,12 +22,12 @@ RSpec.describe 'recipe_foods/edit', type: :view do
       user_id: 1
     )
   end
- before(:each) do
+  before(:each) do
     assign(:recipe, recipe)
     assign(:recipe_food, RecipeFood.new(
                            quantity: 1,
-                           recipe: recipe,
-                           food: food
+                           recipe:,
+                           food:
                          ))
   end
 

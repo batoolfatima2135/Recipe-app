@@ -9,7 +9,7 @@ RSpec.describe 'recipes/new', type: :view do
                       cooking_time: 1,
                       description: 'MyString',
                       public: false,
-                      user: user
+                      user:
                     ))
   end
 
@@ -24,7 +24,6 @@ RSpec.describe 'recipes/new', type: :view do
       assert_select 'input[name=?]', 'recipe[cooking_time]'
 
       assert_select 'textarea[name=?]', 'recipe[description]'
-
     end
   end
 end

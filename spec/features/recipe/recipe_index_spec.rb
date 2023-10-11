@@ -5,12 +5,11 @@ RSpec.feature 'Recipes', type: :feature do
 
   before(:each) do
     login_as(user, scope: :user)
-    Recipe.create(name: 'Recipe 1', description: 'Description 1', preparation_time: 1, cooking_time: 2, user: user)
-    Recipe.create(name: 'Recipe 2', description: 'Description 2', preparation_time: 2, cooking_time: 3, user: user)
-    Recipe.create(name: 'Recipe 3', description: 'Description 3', preparation_time: 1, cooking_time: 1, user: user)
+    Recipe.create(name: 'Recipe 1', description: 'Description 1', preparation_time: 1, cooking_time: 2, user:)
+    Recipe.create(name: 'Recipe 2', description: 'Description 2', preparation_time: 2, cooking_time: 3, user:)
+    Recipe.create(name: 'Recipe 3', description: 'Description 3', preparation_time: 1, cooking_time: 1, user:)
   end
   scenario 'User views their recipe list on index' do
-    
     visit recipes_path
 
     expect(page).to have_content('Recipe 2')
@@ -18,9 +17,8 @@ RSpec.feature 'Recipes', type: :feature do
   end
 
   scenario 'User views delete recipe button on index' do
-    
     visit recipes_path
-    
+
     expect(page.all('button', text: 'Remove').count).to eq(3)
   end
 

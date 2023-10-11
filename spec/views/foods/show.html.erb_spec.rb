@@ -4,12 +4,12 @@ RSpec.describe 'foods/show', type: :view do
   before(:each) do
     user = User.first
     assign(:food, Food.create!(
-                   id: 1,
-      name: 'Test food',
-      quantity: 3,
-      measurement_unit: 'gm',
-      price: 120,
-      user: user
+                    id: 1,
+                    name: 'Test food',
+                    quantity: 3,
+                    measurement_unit: 'gm',
+                    price: 120,
+                    user:
                   ))
   end
 
