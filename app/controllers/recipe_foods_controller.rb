@@ -40,7 +40,7 @@ class RecipeFoodsController < ApplicationController
           render :new, status: :unprocessable_entity
         end
       end
-      
+
     else
       redirect_to new_recipe_food_url(@recipe_food), alert: 'Food not available, Add it first.'
     end
