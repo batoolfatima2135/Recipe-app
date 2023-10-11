@@ -1,0 +1,46 @@
+<div class="row justify-content-center m-3">
+  <div class="col-8">
+    <h2 class="text-center mb-5">General Shoping List</h2>
+    <div class="justify-content-between">
+        <div class="row">
+            <div class="col-md-6 d-flex">
+                <p><b>Amout Of Food Items to buy: </b></p>
+                <p class="mx-2"><%= @count %></p>
+            </div>
+            <div class="col-md-6 d-flex">
+                <p><b>Total value of food: </b></p>
+                <p class="mx-2">$<%= @total_amount %></p>
+            </div>
+        </div> 
+    </div>
+    
+    <table class="table table-success table-striped-columns my-4">
+      <thead>
+        <tr>
+          <th scope="col">Food</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @food_items.each do |food_item| %>
+            <% food_item.quantity = food_item.quantity.negative? ? food_item.quantity.abs : food_item.quantity %></p>
+            <tr>
+                <td><%= food_item.name %></td>
+                <td><%= food_item.quantity %> <%= food_item.measurement_unit %></td>
+                <td>$<%= (food_item.price * food_item.quantity) %></td>
+            </tr>
+        <% end %>
+        
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="text-center my-3  ">
+  <%= link_to "Back to recipes", recipes_path, class: 'btn btn-warning my-2'  %>
+   <% if can? :destroy, @recipe %>
+  <%= button_to "Remove recipe", @recipe, method: :delete, class: 'btn btn-danger ' %>
+  <% end %>
+</div>
+

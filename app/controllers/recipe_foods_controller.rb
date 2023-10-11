@@ -15,17 +15,32 @@ class RecipeFoodsController < ApplicationController
   def create
     @food = Food.find_by(name: params[:recipe_food][:food_name])
     if @food
-      @quantity = @food.quantity - (params[:recipe_food][:quantity]).to_i
-      @food.update(quantity: @quantity)
-      @recipe_food = RecipeFood.new(quantity: params[:recipe_food][:quantity])
-      @recipe = Recipe.find(params[:recipe_food][:recipe_id])
-      @recipe_food.recipe = @recipe
-      @recipe_food.food = @food
-      if @recipe_food.save
-        redirect_to recipe_url(@recipe), notice: 'Recipe ingredient was successfully added.'
+      @recipe_food = RecipeFood.find_by(food_id: @food.id, recipe_id: params[:recipe_food][:recipe_id])
+      if @recipe_food
+        @quantity = @food.quantity - (params[:recipe_food][:quantity]).to_i
+        @food.update(quantity: @quantity)
+        new_quantity = @recipe_food.quantity + (params[:recipe_food][:quantity]).to_i
+        recipe_food = @recipe_food.update(quantity: new_quantity)
+        @recipe = Recipe.find(params[:recipe_food][:recipe_id])
+        if recipe_food
+          redirect_to recipe_url(@recipe), notice: 'Recipe ingredient was successfully added.'
+        else
+          render :new, status: :unprocessable_entity
+        end
       else
-        render :new, status: :unprocessable_entity
+        @quantity = @food.quantity - (params[:recipe_food][:quantity]).to_i
+        @food.update(quantity: @quantity)
+        @recipe_food = RecipeFood.new(quantity: params[:recipe_food][:quantity])
+        @recipe = Recipe.find(params[:recipe_food][:recipe_id])
+        @recipe_food.recipe = @recipe
+        @recipe_food.food = @food
+        if @recipe_food.save
+          redirect_to recipe_url(@recipe), notice: 'Recipe ingredient was successfully added.'
+        else
+          render :new, status: :unprocessable_entity
+        end
       end
+      
     else
       redirect_to new_recipe_food_url(@recipe_food), alert: 'Food not available, Add it first.'
     end
