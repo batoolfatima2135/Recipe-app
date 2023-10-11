@@ -1,3 +1,13 @@
+<% if @recipe.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+    <ul>
+      <% @recipe.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 <div class="row justify-content-center">
     <div class="col-6">
 <%= form_with(model: recipe) do |form| %>
@@ -31,10 +41,10 @@
 
   <div>
     <%= form.label :description, style: "display: block",  class: 'form-label'%>
-    <%= form.text_field :description, class: 'form-control' %>
+    <%= form.text_area :description,  rows: 5, class: 'form-control' %>
   </div>
 
-  <div>
+  <div class="my-3">
     <%= form.submit class: 'btn btn-success'%>
   </div>
 <% end %>
