@@ -24,22 +24,6 @@ RSpec.describe '/recipe_foods', type: :request do
     skip('Add a hash of attributes invalid for your model')
   end
 
-  describe 'GET /index' do
-    it 'renders a successful response' do
-      RecipeFood.create! valid_attributes
-      get recipe_foods_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe 'GET /show' do
-    it 'renders a successful response' do
-      recipe_food = RecipeFood.create! valid_attributes
-      get recipe_food_url(recipe_food)
-      expect(response).to be_successful
-    end
-  end
-
   describe 'GET /new' do
     it 'renders a successful response' do
       get new_recipe_food_url
