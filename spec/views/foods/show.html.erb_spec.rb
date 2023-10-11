@@ -2,21 +2,22 @@ require 'rails_helper'
 
 RSpec.describe 'foods/show', type: :view do
   before(:each) do
+    user = User.first
     assign(:food, Food.create!(
-                    name: 'Name',
-                    measurement_unit: 'Measurement Unit',
-                    price: 2,
+                    id: 1,
+                    name: 'Test food',
                     quantity: 3,
-                    user: nil
+                    measurement_unit: 'gm',
+                    price: 120,
+                    user:
                   ))
   end
 
-  it 'renders attributes in <p>' do
+  it 'renders attributes in <td>' do
     render
-    expect(rendered).to match(/Name/)
-    expect(rendered).to match(/Measurement Unit/)
-    expect(rendered).to match(/2/)
+    expect(rendered).to match(/Test food/)
+    expect(rendered).to match(/gm/)
     expect(rendered).to match(/3/)
-    expect(rendered).to match(//)
+    expect(rendered).to match(/120/)
   end
 end

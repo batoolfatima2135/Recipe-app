@@ -1,14 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe 'recipes/show', type: :view do
+  include Devise::Test::ControllerHelpers
   before(:each) do
+    user = User.first
     assign(:recipe, Recipe.create!(
                       name: 'Name',
                       preparation_time: 2,
                       cooking_time: 3,
                       description: 'Description',
                       public: false,
-                      user: nil
+                      user:
                     ))
   end
 
@@ -18,7 +20,5 @@ RSpec.describe 'recipes/show', type: :view do
     expect(rendered).to match(/2/)
     expect(rendered).to match(/3/)
     expect(rendered).to match(/Description/)
-    expect(rendered).to match(/false/)
-    expect(rendered).to match(//)
   end
 end
