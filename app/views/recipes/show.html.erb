@@ -1,66 +1,71 @@
-<div class="row justify-content-center m-5">
+<div class="row justify-content-center m-3">
   <div class="col-8">
-     <h2 class="text-center mb-5"><%= @recipe.name %></h2>
-     <div class="d-flex justify-content-between">
-       <div class="d-flex">
-       <p><b>Prepration Time: </b></p>
-           <p class="mx-2"><%= @recipe.preparation_time %> hours</p>
-       </div>
-
-     <div class="form-check form-switch">
-      <label class="form-check-label" for="flexSwitch">Public</label>
-      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitch">
-    </div>
-
-     </div>
+    <h2 class="text-center mb-5"><%= @recipe.name %></h2>
+    <div class="d-flex justify-content-between">
       <div class="d-flex">
-       <p><b>Cooking Time: </b></p>
-           <p class="mx-2"><%= @recipe.cooking_time %> hours</p>
-       </div>
-       <div class="d-flex">
-       <p><b>Description: </b></p>
-           <p class="mx-2"><%= @recipe.description %></p>
-       </div>
-       <div class="d-flex justify-content-between">
-           <%= button_to "Generate shopping list", recipe_foods_path, class: 'btn btn-success my-2' %>
-           <%= link_to "Add ingredient", new_recipe_recipe_food_path(@recipe), class: 'btn btn-success my-2' %>
-       </div>
- <table class="table table-success table-striped-columns my-4">
-    <thead>
-    <tr>
-      <th scope="col">Food</th>
-      <th scope="col">Quantity</th>
-      <th scope="col">Value</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% if @recipe_foods.present? %>
- <% @recipe_foods.each do |recipe_food| %>
-     <tr>
-      <td><%= recipe_food.food.name %> </td>
-      <td><%= recipe_food.quantity %> <%= recipe_food.food.measurement_unit %></td>
-      <td>$<%= recipe_food.quantity * recipe_food.food.price %></td>
-      <td class="d-flex">
-          <%= link_to "Modify", edit_recipe_recipe_food_path(recipe_food.recipe, recipe_food), class: 'p-2 mx-2'%> 
-          <%= button_to "Remove",  recipe_recipe_food_path(recipe_food.recipe.id, recipe_food), method: :delete, class: 'btn btn-warning' %>
-      </td>
-    </tr>
-  <% end %>
-   <% else %>
-    <td colspan="4" class="text-center"> No ingredients yet</td>
-   <% end %> 
-   
-  </tbody>
-  </table>
+        <p><b>Preparation Time: </b></p>
+        <p class="mx-2"><%= @recipe.preparation_time %> hours</p>
+      </div>
+      <% if can? :manage, @recipe %>
+      <div class="form-check form-switch">
+        <label class="form-check-label" for="publicToggle">Public</label>
+        <input class="form-check-input" type="checkbox" id="publicToggle" name="recipe[public]" <%= @recipe.public ? 'checked' : '' %>>
+      </div>
+       <% end %>
+    </div>
+    <div id="recipeId" hidden ><%= @recipe.id %></div>
+    <div class="d-flex">
+      <p><b>Cooking Time: </b></p>
+      <p class="mx-2"><%= @recipe.cooking_time %> hours</p>
+    </div>
+    <div>
+      <p><b>Description: </b></p>
+      <p><%= @recipe.description %></p>
+    </div>
+     <% if can? :manage, @recipe %>
+    <div class="d-flex justify-content-between">
+      <%= button_to "Generate shopping list", recipe_foods_path, class: 'btn btn-success my-2' %>
+      <%= link_to "Add ingredient", new_recipe_recipe_food_path(@recipe), class: 'btn btn-success my-2' %>
+    </div>
+    <% end %>
+    <table class="table table-success table-striped-columns my-4">
+      <thead>
+        <tr>
+          <th scope="col">Food</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Value</th>
+           <% if can? :manage, @recipe %>
+          <th scope="col">Actions</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @recipe_foods.present? %>
+        <% @recipe_foods.each do |recipe_food| %>
+        <tr>
+          <td><%= recipe_food.food.name %> </td>
+          <td><%= recipe_food.quantity %> <%= recipe_food.food.measurement_unit %></td>
+          <td>$<%= recipe_food.quantity * recipe_food.food.price %></td>
+          <% if can? :manage, recipe_food %>
+          <td class="d-flex">
+            <%= link_to "Modify", edit_recipe_recipe_food_path(recipe_food.recipe, recipe_food), class: 'p-2 mx-2'%> 
+            <%= button_to "Remove",  recipe_recipe_food_path(recipe_food.recipe.id, recipe_food), method: :delete, class: 'btn btn-warning' %>
+          </td>
+          <% end %>
+        </tr>
+        <% end %>
+        <% else %>
+        <td colspan="4" class="text-center"> No ingredients yet</td>
+        <% end %> 
+      </tbody>
+    </table>
   </div>
-  
 </div>
 
-
-<div>
-  <%= link_to "Edit this recipe", edit_recipe_path(@recipe) %> |
-  <%= link_to "Back to recipes", recipes_path %>
-  
-  <%= button_to "Destroy this recipe", @recipe, method: :delete %>
+<div class="text-center my-3  ">
+  <%= link_to "Back to recipes", recipes_path, class: 'btn btn-warning my-2'  %>
+   <% if can? :destroy, @recipe %>
+  <%= button_to "Remove recipe", @recipe, method: :delete, class: 'btn btn-danger ' %>
+  <% end %>
 </div>
+
