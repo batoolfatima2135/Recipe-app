@@ -9,5 +9,6 @@ Rails.application.routes.draw do
     put 'toggle_public', on: :member
     resources :recipe_foods
   end
+  get 'general_shoping_list', to: 'general_shoping#index'
 
 end

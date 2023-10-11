@@ -15,13 +15,12 @@ class RecipeFoodsController < ApplicationController
   def create
     @food = Food.find_by(name: params[:recipe_food][:food_name])
     if @food
-      @quantity = @food.quantity - (params[:recipe_food][:quantity]).to_i
-      @food.update(quantity: @quantity)
-      @recipe_food = RecipeFood.new(quantity: params[:recipe_food][:quantity])
-      @recipe = Recipe.find(params[:recipe_food][:recipe_id])
-      @recipe_food.recipe = @recipe
-      @recipe_food.food = @food
+      @recipe_food = RecipeFood.find_or_initialize_by(food_id: @food.id, recipe_id: @recipe.id)
+      quantity_change = (params[:recipe_food][:quantity]).to_i
+      @recipe_food.quantity += quantity_change
+
       if @recipe_food.save
+        @food.update(quantity: @food.quantity - quantity_change)
         redirect_to recipe_url(@recipe), notice: 'Recipe ingredient was successfully added.'
       else
         render :new, status: :unprocessable_entity

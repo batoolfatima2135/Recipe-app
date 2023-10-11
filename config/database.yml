@@ -25,7 +25,7 @@ default: &default
 development:
   <<: *default
   database: Recipe_App_development
-  username: postgres
+  username: kamranasif
   password: 12345
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -60,7 +60,7 @@ development:
 test:
   <<: *default
   database: Recipe_App_test
-  username: postgres
+  username: kamranasif
   password: 12345
 
 # As with config/credentials.yml, you never want to store sensitive information,
@@ -86,5 +86,5 @@ test:
 production:
   <<: *default
   database: Recipe_App_production
-  username: postges
+  username: kamranasif
   password: 12345
