@@ -16,13 +16,10 @@ class FoodsController < ApplicationController
   def create
     @food = Food.new(food_params)
     @food.user_id = current_user.id
-
-    respond_to do |format|
-      if @food.save
-        redirect_to food_url(@food), notice: 'Food was successfully created.' 
-      else
-        render :new, status: :unprocessable_entity
-      end
+    if @food.save
+      redirect_to food_url(@food), notice: 'Food was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 

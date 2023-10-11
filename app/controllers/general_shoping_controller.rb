@@ -1,7 +1,6 @@
 class GeneralShopingController < ApplicationController
   before_action :authenticate_user!
   def index
-    # add inner join i guess like. if any food is added in recipe list whihc is not available in food then we have to use left/right join
     @food_items = Food.where('quantity < 0')
     @total_amount = 0
     @count = 0
