@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-
 RSpec.describe '/recipes', type: :request do
   include Devise::Test::ControllerHelpers
   include Devise::Test::IntegrationHelpers
@@ -60,7 +59,6 @@ RSpec.describe '/recipes', type: :request do
       expect(response).to be_successful
     end
   end
-
 
   # describe 'POST /create' do
   #   context 'with valid parameters' do
