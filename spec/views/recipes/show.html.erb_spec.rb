@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'recipes/show', type: :view do
+  include Devise::Test::ControllerHelpers 
   before(:each) do
     user = User.first
     assign(:recipe, Recipe.create!(

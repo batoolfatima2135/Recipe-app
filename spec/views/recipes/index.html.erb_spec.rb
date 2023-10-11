@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'recipes/index', type: :view do
+  include Devise::Test::ControllerHelpers 
   before(:each) do
     user = User.first
     assign(:recipes, [

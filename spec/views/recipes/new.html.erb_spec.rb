@@ -23,7 +23,7 @@ RSpec.describe 'recipes/new', type: :view do
 
       assert_select 'input[name=?]', 'recipe[cooking_time]'
 
-      assert_select 'input[name=?]', 'recipe[description]'
+      assert_select 'textarea[name=?]', 'recipe[description]'
 
     end
   end
