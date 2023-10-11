@@ -1,10 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe '/recipes', type: :request do
-  include Devise::Test::ControllerHelpers
-  include Devise::Test::IntegrationHelpers
 
-  let(:user) { User.create(email: 'test@example.com', password: 'password') }
+  let(:user) { User.create(email: 'abc@example.com', password: 'password') }
 
   let(:valid_attributes) do
     {
@@ -12,7 +10,7 @@ RSpec.describe '/recipes', type: :request do
       description: 'Testing',
       cooking_time: 1,
       preparation_time: 2,
-      user:
+      user: user
     }
   end
 
@@ -25,20 +23,12 @@ RSpec.describe '/recipes', type: :request do
     }
   end
 
-  before :all do
-    user = User.create(email: 'test@example.com', password: 'password')
-    {
-      name: 'test recipe',
-      description: 'Testing',
-      cooking_time: 1,
-      preparation_time: 2,
-      user:
-    }
+   before(:each) do
+    login_as(user, scope: :user)
   end
 
   describe 'GET /index' do
     it 'renders a successful response' do
-      sign_in user
       Recipe.create! valid_attributes
       get recipes_url
       expect(response).to be_successful
