@@ -1,0 +1,9 @@
+<h2 class="text-center text-success m-5">Editing recipe food</h2>
+
+<%= render "form", recipe_food: @recipe_food, edit: @edit %>
+
+<br>
+
+<div class="text-center">
+  <%= link_to "Back to recipe", recipe_path(@recipe) %>
+</div>

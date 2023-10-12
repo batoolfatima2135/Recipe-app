@@ -1,0 +1,25 @@
+<div class="row justify-content-center">
+    <div class="col-6">
+<%= form_with(model: recipe_food) do |form| %>
+  <div>
+  <% unless @edit %>
+  <%= form.label :food_name, style: "display: block", class: 'form-label',  required: true %>
+  <%= form.text_field :food_name, class: 'form-control' %>
+  <% end %>
+</div>
+
+  <div>
+    <%= form.label :quantity, style: "display: block", class: 'form-label' do %>
+    Quantity
+   <span>(in grams/units)</span>
+   <% end %>
+    <%= form.number_field :quantity, class: 'form-control', required: true %>
+  </div>
+ <%= form.hidden_field :recipe_id, value: @recipe.id %>
+
+  <div>
+    <%= form.submit  "Add ingredient", class: 'btn btn-success text-center my-4'%>
+  </div>
+<% end %>
+ </div>
+  </div>

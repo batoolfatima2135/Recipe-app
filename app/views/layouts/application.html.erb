@@ -5,12 +5,66 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
+      <%= render "shared/navbar" %>
+     <% if notice %>
+      <div class="alert alert-success mx-3" role="alert">
+        <%= notice %>
+      </div>
+      <% end %>
+      <% if alert %>
+      <div class="alert alert-danger mx-3" role="alert">
+        <%= alert %>
+      </div>
+      <% end %>
+  
     <%= yield %>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>   
+<script type="text/javascript">
+  $(document).ready(function() {
+    var element = document.getElementById("recipeId");
+    $('#publicToggle').change(function() {
+      var isPublic = this.checked;  
+      var recipeId = element.textContent.trim();
+      $.ajax({
+        type: 'PUT',
+        url: '/recipes/' + recipeId + '/toggle_public',
+        data: { 'recipe[public]': isPublic },
+        success: function(response) {
+           $('#publicToggle').prop('checked', isPublic);
+           if (isPublic) {
+               Swal.fire(
+          'Recipe published',
+          'Your recipe is now public',
+          'success'
+           )
+           } else {
+             Swal.fire(
+          'Recipe unpublished',
+          'Your recipe is now private',
+          'success'
+           )
+           }
+          
+        },
+        error: function(xhr) {
+          Swal.fire(
+          'Something went wrong',
+          'try again',
+          'error'
+           )
+        }
+      });
+    });
+  });
+</script>
   </body>
 </html>

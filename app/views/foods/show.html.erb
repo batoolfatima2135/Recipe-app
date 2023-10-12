@@ -1,0 +1,18 @@
+<section class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <p style="color: green"><%= notice %></p>
+    </div>
+  </div>
+
+  <%= render @food %>
+
+  <div class="row">
+    <div class="col-md-12 d-flex justify-content-center">
+      <%= link_to "Edit this food", edit_food_path(@food), class: 'btn btn-warning mr-2' %><span> | </span>
+      <%= link_to "Back to foods", foods_path, class: 'btn btn-info mr-2' %> | 
+
+      <%= button_to "Destroy this food", @food, method: :delete, class: 'btn btn-danger mr-2' %>
+    </div>
+  </div>
+</section>

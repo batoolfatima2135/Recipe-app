@@ -1,0 +1,40 @@
+  <nav class="navbar navbar-expand-lg bg-body-tertiary mx-3">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Recipe App</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Public Recipes</a>
+        </li>
+       <% if user_signed_in? %>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= recipes_path %>" >My Recipes</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link" href="<%= foods_path %>" >My Foods</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link " href="<%= new_recipe_path %>" >Add Recipe</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link " href="<%= new_food_path %>" >Add Food</a>
+        </li>
+         <li class="nav-item" >
+          <a class="nav-link"  href="<%= general_shoping_list_path %>" >Shopping List</a>
+        </li>
+        <% end %>
+         <li class="nav-item d-flex">
+           <% if user_signed_in? %>
+            <%= button_to "Logout", destroy_user_session_path, class: "btn btn-success", method: :delete %>
+           <% else %>
+             <%= button_to "Login", new_user_session_path, class: "btn btn-success mx-3", method: :get %>
+             <%= button_to "Register", new_user_registration_path, class: "btn btn-success", method: :get %> 
+           <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
