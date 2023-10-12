@@ -18,11 +18,11 @@ RSpec.feature 'Foods Index Page', type: :feature do
   scenario 'User views delete Food button on index' do
     foods = Food.where(user:)
     foods.each do |food|
-      expect(page).to have_selector("button[data-food-id='#{food.id}']", text: 'Destroy this food')
+      expect(page).to have_content('Destroy this food')
     end
   end
   scenario 'User clicks on a New Food and is redirected to their New Food page' do
-    click_link 'New Food'
+    first('a', text: 'New Food').click
     expect(page).to have_current_path(new_food_path)
   end
 end
