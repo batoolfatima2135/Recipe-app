@@ -22,7 +22,7 @@ RSpec.feature 'Foods Index Page', type: :feature do
     end
   end
   scenario 'User clicks on a New Food and is redirected to their New Food page' do
-    first('a', text: 'New Food').click
+    first('a', text: 'New food').click
     expect(page).to have_current_path(new_food_path)
   end
 end

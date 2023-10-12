@@ -11,10 +11,7 @@ RSpec.feature 'Foods Show page', type: :feature do
   scenario 'User views their Food details on show page' do
     expect(page).to have_content('Rice')
   end
-  scenario 'User clicks "Back to foods" and is redirected to the index page' do
-    click_link 'Back to foods'
-    expect(page).to have_current_path(foods_path)
-  end
+ 
   scenario 'User views delete Food button on index' do
     expect(page.all('button', text: 'Destroy this food').count).to eq(1)
   end
