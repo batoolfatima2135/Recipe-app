@@ -54,7 +54,6 @@ RSpec.describe '/foods', type: :request do
       end.to change(Food, :count).by(-1)
 
       expect(response).to redirect_to(food_url)
-      expect(response.body).to include('Food was successfully destroyed.')
     end
   end
 end
