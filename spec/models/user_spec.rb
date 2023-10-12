@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   it 'is valid with valid attributes' do
-    user = User.new(email: 'user@example.com', password: 'password123')
+    user = User.new(email: 'new@example.com', password: 'password123')
     expect(user).to be_valid
+    user.destroy if user.persisted?
   end
 
   it 'is not valid without an email' do
