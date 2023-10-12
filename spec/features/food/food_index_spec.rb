@@ -17,7 +17,7 @@ RSpec.feature 'Foods Index Page', type: :feature do
 
   scenario 'User views delete Food button on index' do
     foods = Food.where(user:)
-    foods.each do |food|
+    foods.each do |_food|
       expect(page).to have_content('Destroy this food')
     end
   end

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe '/recipes', type: :request do
-
   let(:user) { User.create(email: 'abc@example.com', password: 'password') }
 
   let(:valid_attributes) do
@@ -10,7 +9,7 @@ RSpec.describe '/recipes', type: :request do
       description: 'Testing',
       cooking_time: 1,
       preparation_time: 2,
-      user: user
+      user:
     }
   end
 
@@ -23,7 +22,7 @@ RSpec.describe '/recipes', type: :request do
     }
   end
 
-   before(:each) do
+  before(:each) do
     login_as(user, scope: :user)
   end
 
@@ -35,7 +34,7 @@ RSpec.describe '/recipes', type: :request do
     end
   end
   describe 'GET /' do
-    it "should get public recipes" do
+    it 'should get public recipes' do
       get '/'
       assert_response :success
     end
@@ -50,7 +49,7 @@ RSpec.describe '/recipes', type: :request do
   end
 
   describe 'GET /show' do
-    it "should update recipe as public" do
+    it 'should update recipe as public' do
       recipe = Recipe.create! valid_attributes
       put toggle_public_recipe_url(recipe.id), params: { recipe: { public: true } }, as: :json
       assert_response :success
@@ -94,7 +93,6 @@ RSpec.describe '/recipes', type: :request do
     end
   end
 
- 
   describe 'DELETE /destroy' do
     it 'destroys the requested recipe' do
       recipe = Recipe.create! valid_attributes
