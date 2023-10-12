@@ -16,7 +16,7 @@ RSpec.describe '/foods', type: :request do
 
   describe 'GET /foods/:id' do
     it 'renders a successful response' do
-      food = Food.create(name: 'Rice', measurement_unit: 'kg', price: 10, quantity: 20, user:) # Create a food record for testing
+      food = Food.create(name: 'Rice', measurement_unit: 'kg', price: 10, quantity: 20, user:)
       get food_url(food)
       expect(response).to have_http_status(200)
     end
@@ -47,7 +47,7 @@ RSpec.describe '/foods', type: :request do
 
   describe 'DELETE /foods/:id' do
     it 'destroys the food' do
-      food = Food.create(name: 'Rice', measurement_unit: 'kg', price: 10, quantity: 20, user: user) # Create a food record for testing
+      food = Food.create(name: 'Rice', measurement_unit: 'kg', price: 10, quantity: 20, user:)
 
       expect do
         delete food_url(food)

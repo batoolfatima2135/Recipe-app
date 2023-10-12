@@ -11,7 +11,7 @@ RSpec.feature 'Foods Show page', type: :feature do
   scenario 'User views their Food details on show page' do
     expect(page).to have_content('Rice')
   end
- 
+
   scenario 'User views delete Food button on index' do
     expect(page.all('button', text: 'Destroy this food').count).to eq(1)
   end

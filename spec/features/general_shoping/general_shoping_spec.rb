@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.feature 'General Shoping', type: :feature do
   let(:user) { User.create!(email: 'testing@gmail.com', password: 'f4k3p455w0rd') }
-  let!(:food1) { Food.create(name: 'Rice', measurement_unit: 'kg', price: 15, quantity: -3, user: user) }
-  let!(:food2) { Food.create(name: 'Beef', measurement_unit: 'kg', price: 100, quantity: -10, user: user) }
-  let!(:foods) { [food1, food2]}
+  let!(:food1) { Food.create(name: 'Rice', measurement_unit: 'kg', price: 15, quantity: -3, user:) }
+  let!(:food2) { Food.create(name: 'Beef', measurement_unit: 'kg', price: 100, quantity: -10, user:) }
+  let!(:foods) { [food1, food2] }
 
   before do
     login_as(user, scope: :user)
