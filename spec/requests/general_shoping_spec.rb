@@ -31,6 +31,4 @@ RSpec.describe '/general_shoping', type: :request do
       expect(response).to be_successful
     end
   end
-
-  
 end
