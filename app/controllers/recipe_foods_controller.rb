@@ -14,6 +14,7 @@ class RecipeFoodsController < ApplicationController
 
   def create
     @food = Food.find_by(name: params[:recipe_food][:food_name])
+    @recipe = Recipe.find(params[:recipe_id])
     if @food
       @recipe_food = RecipeFood.find_or_initialize_by(food_id: @food.id, recipe_id: @recipe.id)
       quantity_change = (params[:recipe_food][:quantity]).to_i
@@ -26,7 +27,7 @@ class RecipeFoodsController < ApplicationController
         render :new, status: :unprocessable_entity
       end
     else
-      redirect_to new_recipe_food_url(@recipe_food), alert: 'Food not available, Add it first.'
+      redirect_to new_recipe_recipe_food_path(@recipe), alert: 'Food not available, Add it first.'
     end
   end
 
