@@ -3,7 +3,7 @@
 <%= form_with(model: recipe_food) do |form| %>
   <div>
   <% unless @edit %>
-  <%= form.label :food_name, style: "display: block", class: 'form-label' %>
+  <%= form.label :food_name, style: "display: block", class: 'form-label',  required: true %>
   <%= form.text_field :food_name, class: 'form-control' %>
   <% end %>
 </div>
@@ -13,7 +13,7 @@
     Quantity
    <span>(in grams/units)</span>
    <% end %>
-    <%= form.number_field :quantity, class: 'form-control'%>
+    <%= form.number_field :quantity, class: 'form-control', required: true %>
   </div>
  <%= form.hidden_field :recipe_id, value: @recipe.id %>
 
