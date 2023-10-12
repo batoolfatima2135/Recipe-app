@@ -93,7 +93,6 @@ RSpec.describe '/recipes', type: :request do
     end
   end
 
-
   describe 'DELETE /destroy' do
     it 'destroys the requested recipe' do
       recipe = Recipe.create! valid_attributes
