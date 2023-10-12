@@ -4,8 +4,8 @@ RSpec.feature 'General Shoping', type: :feature do
   let(:user) { User.create!(email: 'testing@gmail.com', password: 'f4k3p455w0rd') }
   let!(:foods) do
     [
-      create(:food, name: 'Rice', measurement_unit: 'kg', price: 15, quantity: -3, user: user),
-      create(:food, name: 'Beef', measurement_unit: 'kg', price: 100, quantity: -10, user: user)
+      create(:food, name: 'Rice', measurement_unit: 'kg', price: 15, quantity: -3, user:),
+      create(:food, name: 'Beef', measurement_unit: 'kg', price: 100, quantity: -10, user:)
     ]
   end
 
@@ -19,11 +19,10 @@ RSpec.feature 'General Shoping', type: :feature do
     expect(page).to have_content('Amout Of Food Items to buy:')
     expect(page).to have_content('Total value of food:')
     expect(page).to have_css('table.table.table-success')
-
   end
 
   scenario 'User view the General Shoping list' do
-    foods.each do |food| 
+    foods.each do |food|
       food.quantity = food.quantity.negative? ? food.quantity.abs : food.quantity
       expect(page).to have_content(food.name)
       expect(page).to have_content("#{food.quantity} #{food.measurement_unit}")
@@ -34,5 +33,4 @@ RSpec.feature 'General Shoping', type: :feature do
     click_link 'Back to recipes'
     expect(page).to have_current_path(recipes_path)
   end
-
 end
