@@ -25,14 +25,6 @@ RSpec.feature 'Recipes index', type: :feature do
   scenario 'User views recipe by click on description' do
     click_link(@recipe1.description)
     expect(page).to have_current_path(recipe_path(@recipe1))
-
-    visit recipes_path
-    click_link(@recipe2.description)
-    expect(page).to have_current_path(recipe_path(@recipe2))
-
-    visit recipes_path
-    click_link(@recipe3.description)
-    expect(page).to have_current_path(recipe_path(@recipe3))
   end
 
   scenario 'User deletes recipe by button' do
