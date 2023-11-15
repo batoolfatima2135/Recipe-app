@@ -1,29 +1,32 @@
 <section class="container mt-5">
   <h2 class="d-flex justify-content-center">Log in</h2>
 
-
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "form") do |f| %>
-    <div class="field">
+  <div class="row justify-content-center">
+    <div class="col-6">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "form") do |f| %>
+    <div class="field mt-2">
       <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-field w-100" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "mt-2 form-field w-100 border-secondary form-control" %>
     </div>
 
-    <div class="field">
+    <div class="field mt-3">
       <%= f.label :password %><br />
-      <%= f.password_field :password, autocomplete: "current-password", class: "form-field w-100" %>
+      <%= f.password_field :password, autocomplete: "current-password", class: "mt-2 form-field w-100 border-secondary form-control" %>
     </div>
 
     <% if devise_mapping.rememberable? %>
-      <div class="field">
+      <div class="field mt-4">
         <%= f.check_box :remember_me, class: "form-field checkbox" %>
         <%= f.label :remember_me %>
       </div>
     <% end %>
-
-    <div class="actions  d-flex justify-content-center mb-4">
-      <%= f.submit "Log in", class: "btn btn-danger w-50" %>
+    <span>Don't have an account?  <%= link_to "Sign up", new_registration_path(resource_name) %></span><br />
+     <p><%= link_to "Forgot your password?", new_password_path(resource_name) %></p>
+    <div class="actions  d-flex justify-content-center">
+      <%= f.submit "Log in", class: "btn btn-success w-50" %>
     </div>
   <% end %>
+    </div>
+  </div>
 
-  <%= render "devise/shared/links" %>
 </section>

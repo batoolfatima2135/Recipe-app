@@ -1,12 +1,13 @@
 <section class="container mt-5">
   <h2 class="d-flex justify-content-center">Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "form") do |f| %>
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "form w-25") do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field mt-3">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-field w-100" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "mt-2 form-field w-100 border-secondary form-control" %>
   </div>
 
   <div class="field mt-3">
@@ -14,18 +15,24 @@
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password", class: "form-field w-100" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "mt-2 form-field w-100 border-secondary form-control" %>
   </div>
 
   <div class="field mt-3">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-field w-100" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "mt-2 form-field border-secondary w-100 form-control" %>
   </div>
 
   <div class="actions mt-3 d-flex justify-content-center">
-    <%= f.submit "Sign up", class: "btn btn-danger w-50" %>
-  </div>
-<% end %>
+    <%= f.submit "Sign up", class: "btn btn-success w-50 mb-2" %>
 
-<%= render "devise/shared/links" %>
+  </div>
+      
+<% end %>
+<span class="mt-4">Already have an account? <%= link_to "Log in", new_session_path(resource_name), class: "mt-4" %> </span>
+    </div>
+  </div>
+
+
+
 </section>
