@@ -28,7 +28,7 @@
               <% @foods.each do |food| %>
                 <tr>
                   <td><%= link_to food.name, food %></td>
-                  <td><%=  food.quantity %></td>
+                  <td><%=  food.quantity < 0 ? 0 : food.quantity %></td>
                   <td><%= food.measurement_unit %></td>
                   <td>$<%= food.price %></td>
                   <td><%= button_to "Destroy this food", food, method: :delete, class: 'btn btn-danger mr-2' %></td>
